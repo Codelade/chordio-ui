@@ -8,9 +8,7 @@ function App() {
         <Routes>
 
           {/* Debug CRUD Layout */}
-          <Route element={<DebugLayout />}>
-            <Route path="/admin" element={<DebugLayout />} />
-          </Route>
+          <Route path="/admin" element={<DebugLayout />}></Route>
 
         </Routes>
       </BrowserRouter>
