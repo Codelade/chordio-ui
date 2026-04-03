@@ -8,7 +8,7 @@ function App() {
       {/* Defines what handles page routing */}
       <Routes>
         {/* Debug CRUD Layout */}
-        <Route path="/admin" element={<DebugCreateUserLayout />}></Route>
+        <Route path="/debug" element={<DebugCreateUserLayout />}></Route>
       </Routes>
     </BrowserRouter>
   );
