@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import DebugUserService from "../services/DebugUserService";
+import { useNavigate } from "react-router-dom";
 
 const DebugCreateUser = () => {
+  const navigate = useNavigate();
+
   const [user, setUser] = useState({
     email: "",
     userName: "",
@@ -15,9 +18,26 @@ const DebugCreateUser = () => {
 
   const createUser = (e) => {
     e.preventDefault();
+
     DebugUserService.createUser(user)
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error));
+      .then(() => {
+        navigate("/debug/listUsers", {
+          state: {
+            type: "success",
+            message: "User created successfully",
+          },
+        });
+      })
+      .catch((error) => {
+        console.error("Error creating user:", error);
+
+        navigate("/debug/listUsers", {
+          state: {
+            type: "error",
+            message: "Failed to create user, check console for logs",
+          },
+        });
+      });
   };
 
   const handleClear = () => {
@@ -37,7 +57,6 @@ const DebugCreateUser = () => {
         </h1>
 
         <form className="flex flex-col gap-4" onSubmit={createUser}>
-          {/* Email */}
           <div className="flex flex-col">
             <label className="text-gray-700 text-sm mb-1">Email</label>
             <input
@@ -49,7 +68,6 @@ const DebugCreateUser = () => {
             />
           </div>
 
-          {/* Username */}
           <div className="flex flex-col">
             <label className="text-gray-700 text-sm mb-1">Username</label>
             <input
@@ -61,7 +79,6 @@ const DebugCreateUser = () => {
             />
           </div>
 
-          {/* Password */}
           <div className="flex flex-col">
             <label className="text-gray-700 text-sm mb-1">Password</label>
             <input
@@ -73,7 +90,6 @@ const DebugCreateUser = () => {
             />
           </div>
 
-          {/* Role */}
           <div className="flex flex-col">
             <label className="text-gray-700 text-sm mb-1">Role</label>
             <select
@@ -89,7 +105,6 @@ const DebugCreateUser = () => {
             </select>
           </div>
 
-          {/* Buttons */}
           <div className="flex flex-col md:flex-row md:justify-between gap-3 pt-1">
             <button
               type="submit"
