@@ -10,6 +10,10 @@ class DebugUserService {
   getUsers() {
     return axios.get(USER_API_URL);
   }
+
+  deleteUser(id) {
+    return axios.delete(`${USER_API_URL}/${id}`);
+  }
 }
 
 const debugUserService = new DebugUserService();
