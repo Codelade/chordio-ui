@@ -1,22 +1,19 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import DebugCreateUserLayout from "./layouts/DebugCreateUserLayout";
 import DebugListUsersLayout from "./layouts/DebugListUsersLayout";
+import DebugEditUserLayout from "./layouts/DebugEditUserLayout";
 
 function App() {
   return (
     <BrowserRouter>
-      {/* Defines what handles page routing */}
       <Routes>
-        {/* Debug CRUD Layout */}
-        <Route
-          path="/debug/createUser"
-          element={<DebugCreateUserLayout />}
-        ></Route>
-        <Route
-          path="/debug/listUsers"
-          element={<DebugListUsersLayout />}
-        ></Route>
+        <Route path="/debug/createUser" element={<DebugCreateUserLayout />} />
+
+        <Route path="/debug/listUsers" element={<DebugListUsersLayout />} />
+
+        <Route path="/debug/editUser/:id" element={<DebugEditUserLayout />} />
       </Routes>
     </BrowserRouter>
   );

@@ -32,7 +32,7 @@ const DebugListUsers = () => {
 
   const RoleBadge = ({ role }) => {
     const base =
-      "inline-flex items-center justify-center w-20 px-2 py-1 rounded text-xs font-semibold";
+      "inline-flex items-center justify-center w-14 px-2 py-1 rounded text-xs font-semibold";
 
     const styles = {
       USER: "bg-blue-100 text-blue-700",
@@ -159,7 +159,10 @@ const DebugListUsers = () => {
                       <button className="text-blue-600 hover:text-blue-700 font-medium">
                         Show
                       </button>
-                      <button className="text-blue-600 hover:text-blue-700 font-medium">
+                      <button
+                        onClick={() => navigate(`/debug/editUser/${user.id}`)}
+                        className="text-blue-600 hover:text-blue-700 font-medium"
+                      >
                         Edit
                       </button>
                       <button

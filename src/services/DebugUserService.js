@@ -11,6 +11,14 @@ class DebugUserService {
     return axios.get(USER_API_URL);
   }
 
+  getUser(id) {
+    return axios.get(`${USER_API_URL}/${id}`);
+  }
+
+  updateUser(id, user) {
+    return axios.put(`${USER_API_URL}/${id}`, user);
+  }
+
   deleteUser(id) {
     return axios.delete(`${USER_API_URL}/${id}`);
   }
