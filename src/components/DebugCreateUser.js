@@ -1,150 +1,70 @@
 import React, { useState } from "react";
-import DebugUserService from "../services/DebugUserService";
 import { useNavigate } from "react-router-dom";
+import DebugUserService from "../services/DebugUserService";
+import UserForm from "./UserForm";
+
+const INITIAL_USER = {
+  email: "",
+  userName: "",
+  password: "",
+  role: "USER",
+};
 
 const DebugCreateUser = () => {
   const navigate = useNavigate();
-
-  const [user, setUser] = useState({
-    email: "",
-    userName: "",
-    password: "",
-    role: "USER",
-  });
+  const [user, setUser] = useState(INITIAL_USER);
 
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
-  const createUser = (e) => {
-    e.preventDefault();
-
-    DebugUserService.createUser(user)
-      .then(() => {
-        navigate("/debug/listUsers", {
-          state: {
-            type: "success",
-            message: "User created successfully",
-          },
-        });
-      })
-      .catch((error) => {
-        console.error("Error creating user:", error);
-
-        navigate("/debug/listUsers", {
-          state: {
-            type: "error",
-            message: "Failed to create user, check console for logs",
-          },
-        });
-      });
+  const handleClear = () => {
+    setUser(INITIAL_USER);
   };
 
-  const handleClear = () => {
-    setUser({
-      email: "",
-      userName: "",
-      password: "",
-      role: "USER",
+  const handleCancel = () => {
+    navigate("/debug/listUsers", {
+      replace: true,
+      state: {
+        type: "info",
+        message: "Create user operation cancelled",
+      },
     });
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      await DebugUserService.createUser(user);
+      navigate("/debug/listUsers", {
+        replace: true,
+        state: {
+          type: "success",
+          message: "User created successfully",
+        },
+      });
+    } catch (error) {
+      console.error("Error creating user:", error);
+      navigate("/debug/listUsers", {
+        replace: true,
+        state: {
+          type: "error",
+          message: "Failed to create user, check console for logs",
+        },
+      });
+    }
+  };
+
   return (
-    <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center bg-gray-100 px-4 py-8">
-      <div className="w-full max-w-lg bg-white shadow-lg rounded-xl p-6 border border-gray-200">
-        {/* Title */}
-        <h1 className="text-xl font-semibold text-gray-800 text-center mb-6">
-          Create Debug User
-        </h1>
-
-        <form className="flex flex-col gap-5" onSubmit={createUser}>
-          {/* Email */}
-          <div className="flex flex-col">
-            <label className="text-gray-700 text-sm mb-1">Email</label>
-            <input
-              type="email"
-              name="email"
-              value={user.email}
-              onChange={handleChange}
-              className="h-10 border border-gray-300 rounded-md px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-            />
-          </div>
-
-          {/* Username */}
-          <div className="flex flex-col">
-            <label className="text-gray-700 text-sm mb-1">Username</label>
-            <input
-              type="text"
-              name="userName"
-              value={user.userName}
-              onChange={handleChange}
-              className="h-10 border border-gray-300 rounded-md px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-            />
-          </div>
-
-          {/* Password */}
-          <div className="flex flex-col">
-            <label className="text-gray-700 text-sm mb-1">Password</label>
-            <input
-              type="password"
-              name="password"
-              value={user.password}
-              onChange={handleChange}
-              className="h-10 border border-gray-300 rounded-md px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-            />
-          </div>
-
-          {/* Role */}
-          <div className="flex flex-col">
-            <label className="text-gray-700 text-sm mb-1">Role</label>
-            <select
-              name="role"
-              value={user.role}
-              onChange={handleChange}
-              className="h-10 border border-gray-300 rounded-md px-3 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-            >
-              <option value="USER">User</option>
-              <option value="MODERATOR">Moderator</option>
-              <option value="ADMINISTRATOR">Administrator</option>
-              <option value="DEVELOPER">Developer</option>
-            </select>
-          </div>
-
-          {/* Buttons */}
-          <div className="flex flex-col sm:flex-row gap-3 pt-2 w-full">
-            <button
-              type="button"
-              onClick={() =>
-                navigate("/debug/listUsers", {
-                  state: {
-                    type: "info",
-                    message: "Create user operation cancelled",
-                  },
-                })
-              }
-              className="w-full py-2 bg-red-600 text-white rounded-md font-semibold hover:bg-red-700 transition"
-            >
-              Cancel
-            </button>
-
-            <button
-              type="button"
-              onClick={handleClear}
-              className="w-full py-2 bg-gray-300 text-gray-800 rounded-md font-semibold hover:bg-gray-400 transition"
-            >
-              Clear
-            </button>
-
-            <button
-              type="submit"
-              className="w-full py-2 bg-green-600 text-white rounded-md font-semibold hover:bg-green-700 transition"
-            >
-              Create
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+    <UserForm
+      user={user}
+      onChange={handleChange}
+      onSubmit={handleSubmit}
+      onClear={handleClear}
+      onCancel={handleCancel}
+      submitLabel="Create Debug User"
+    />
   );
 };
 

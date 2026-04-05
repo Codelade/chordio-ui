@@ -21,8 +21,7 @@ const NotificationBar = ({ type, message }) => {
       <div className="h-12 mb-4 rounded-md border border-gray-300 bg-gray-100 px-4 flex items-center">
         <span className="text-base text-gray-700 mr-2">Notifications:</span>
         <span className="text-base text-gray-600 opacity-80">
-          The status of your create, update, read or delete operation will
-          display here
+          Operation Status...
         </span>
       </div>
     );

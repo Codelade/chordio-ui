@@ -11,6 +11,24 @@ class DebugUserService {
     return axios.get(USER_API_URL);
   }
 
+  searchUsers({
+    search = "",
+    page = 0,
+    size = 10,
+    sortBy = "id",
+    direction = "asc",
+  }) {
+    const params = new URLSearchParams({
+      search,
+      page,
+      size,
+      sortBy,
+      direction,
+    });
+
+    return axios.get(`${USER_API_URL}/search?${params.toString()}`);
+  }
+
   getUser(id) {
     return axios.get(`${USER_API_URL}/${id}`);
   }

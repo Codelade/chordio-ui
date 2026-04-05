@@ -6,7 +6,7 @@ const DebugEditUserLayout = () => {
   return (
     <>
       <DebugNavbar />
-      <DebugEditUser />;
+      <DebugEditUser />
       <Outlet />
     </>
   );
