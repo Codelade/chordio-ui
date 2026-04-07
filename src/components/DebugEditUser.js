@@ -88,8 +88,8 @@ const DebugEditUser = () => {
 
   if (loading) {
     return (
-      <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center bg-gray-100">
-        <p className="text-gray-600">Loading user...</p>
+      <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center bg-slate-100 dark:bg-slate-950 transition-colors duration-200">
+        <p className="text-slate-600 dark:text-slate-300">Loading user...</p>
       </div>
     );
   }
@@ -101,7 +101,8 @@ const DebugEditUser = () => {
       onSubmit={handleSubmit}
       onClear={handleClear}
       onCancel={handleCancel}
-      submitLabel="Save Changes"
+      formTitle="Update User"
+      submitLabel="Update"
     />
   );
 };

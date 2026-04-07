@@ -13,59 +13,71 @@ const UserForm = ({
   onSubmit,
   onClear,
   onCancel,
+  formTitle,
   submitLabel,
 }) => {
   return (
-    <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center bg-gray-100 px-4 py-8">
-      <div className="w-full max-w-lg bg-white shadow-lg rounded-xl p-6 border border-gray-200">
-        <h1 className="text-xl font-semibold text-gray-800 text-center mb-6">
-          {submitLabel}
+    <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center bg-slate-100 dark:bg-slate-950 px-4 py-8 transition-colors duration-200">
+      <div className="w-full max-w-lg bg-white dark:bg-slate-900 shadow-lg dark:shadow-slate-950/40 rounded-2xl p-6 border border-slate-200 dark:border-slate-800">
+        <h1 className="text-xl font-semibold text-slate-900 dark:text-slate-100 text-center mb-6">
+          {formTitle || submitLabel}
         </h1>
 
         <form className="flex flex-col gap-5" onSubmit={onSubmit}>
-          <div className="flex flex-col">
-            <label className="text-gray-700 text-sm mb-1">Email</label>
+          <div className="flex flex-col gap-2">
+            <label className="text-sm font-medium text-slate-700 dark:text-slate-200">
+              Email
+            </label>
             <input
               type="email"
               name="email"
               value={user.email}
               onChange={onChange}
-              className="h-10 border border-gray-300 rounded-md px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+              placeholder="Email address"
+              className="h-10 border border-slate-300 dark:border-slate-700 rounded-md px-3 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
               required
             />
           </div>
 
-          <div className="flex flex-col">
-            <label className="text-gray-700 text-sm mb-1">Username</label>
+          <div className="flex flex-col gap-2">
+            <label className="text-sm font-medium text-slate-700 dark:text-slate-200">
+              Username
+            </label>
             <input
               type="text"
               name="userName"
               value={user.userName}
               onChange={onChange}
-              className="h-10 border border-gray-300 rounded-md px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+              placeholder="Username"
+              className="h-10 border border-slate-300 dark:border-slate-700 rounded-md px-3 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
               required
             />
           </div>
 
-          <div className="flex flex-col">
-            <label className="text-gray-700 text-sm mb-1">Password</label>
+          <div className="flex flex-col gap-2">
+            <label className="text-sm font-medium text-slate-700 dark:text-slate-200">
+              Password
+            </label>
             <input
               type="password"
               name="password"
               value={user.password}
               onChange={onChange}
-              className="h-10 border border-gray-300 rounded-md px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+              placeholder="Password"
+              className="h-10 border border-slate-300 dark:border-slate-700 rounded-md px-3 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
               required
             />
           </div>
 
-          <div className="flex flex-col">
-            <label className="text-gray-700 text-sm mb-1">Role</label>
+          <div className="flex flex-col gap-2">
+            <label className="text-sm font-medium text-slate-700 dark:text-slate-200">
+              Role
+            </label>
             <select
               name="role"
               value={user.role}
               onChange={onChange}
-              className="h-10 border border-gray-300 rounded-md px-3 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+              className="h-10 border border-slate-300 dark:border-slate-700 rounded-md px-3 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
             >
               {ROLE_OPTIONS.map((option) => (
                 <option key={option.value} value={option.value}>
@@ -87,14 +99,14 @@ const UserForm = ({
             <button
               type="button"
               onClick={onClear}
-              className="w-full py-2 bg-gray-300 text-gray-800 rounded-md font-semibold hover:bg-gray-400 transition"
+              className="w-full py-2 bg-slate-200 text-slate-900 rounded-md font-semibold hover:bg-slate-300 transition dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700"
             >
               Clear
             </button>
 
             <button
               type="submit"
-              className="w-full py-2 bg-green-600 text-white rounded-md font-semibold hover:bg-green-700 transition"
+              className="w-full py-2 bg-emerald-600 text-white rounded-md font-semibold hover:bg-emerald-700 transition"
             >
               {submitLabel}
             </button>

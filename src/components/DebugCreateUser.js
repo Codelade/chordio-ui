@@ -63,7 +63,8 @@ const DebugCreateUser = () => {
       onSubmit={handleSubmit}
       onClear={handleClear}
       onCancel={handleCancel}
-      submitLabel="Create Debug User"
+      formTitle="Create New User"
+      submitLabel="Create"
     />
   );
 };

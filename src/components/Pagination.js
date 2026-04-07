@@ -10,70 +10,68 @@ const Pagination = ({ page, totalPages, onPageChange }) => {
   const pages = [];
   for (let i = windowStart; i <= windowEnd; i++) pages.push(i);
 
+  const buttonBase =
+    "px-3 py-1.5 rounded-md text-sm border transition disabled:cursor-not-allowed";
+
   return (
-    <div className="flex items-center gap-1">
-      {/* First */}
+    <div className="flex flex-wrap items-center gap-1">
       <button
         disabled={page === 0}
         onClick={() => onPageChange(0)}
-        className={`px-3 py-1.5 rounded-md text-sm border ${
+        className={`${buttonBase} ${
           page === 0
-            ? "bg-gray-200 text-gray-500 cursor-not-allowed"
-            : "bg-white hover:bg-gray-100 text-gray-700"
+            ? "bg-slate-200 text-slate-500 dark:bg-slate-700 dark:text-slate-300"
+            : "bg-white text-slate-700 border-slate-300 hover:bg-slate-100 dark:bg-slate-900 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800"
         }`}
       >
         ⏮
       </button>
 
-      {/* Prev */}
       <button
         disabled={page === 0}
         onClick={() => onPageChange(page - 1)}
-        className={`px-3 py-1.5 rounded-md text-sm border ${
+        className={`${buttonBase} ${
           page === 0
-            ? "bg-gray-200 text-gray-500 cursor-not-allowed"
-            : "bg-white hover:bg-gray-100 text-gray-700"
+            ? "bg-slate-200 text-slate-500 dark:bg-slate-700 dark:text-slate-300"
+            : "bg-white text-slate-700 border-slate-300 hover:bg-slate-100 dark:bg-slate-900 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800"
         }`}
       >
         ◀
       </button>
 
-      {/* Page numbers */}
       {pages.map((p) => (
         <button
           key={p}
           onClick={() => onPageChange(p)}
-          className={`px-3 py-1.5 rounded-md text-sm border ${
+          className={`${buttonBase} ${
             p === page
-              ? "bg-blue-600 text-white border-blue-600"
-              : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
+              ? "bg-indigo-600 text-white border-indigo-600"
+              : "bg-white text-slate-700 border-slate-300 hover:bg-slate-100 dark:bg-slate-900 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800"
           }`}
         >
           {p + 1}
         </button>
       ))}
 
-      {/* Next */}
       <button
         disabled={page === totalPages - 1}
         onClick={() => onPageChange(page + 1)}
-        className={`px-3 py-1.5 rounded-md text-sm border ${
+        className={`${buttonBase} ${
           page === totalPages - 1
-            ? "bg-gray-200 text-gray-500 cursor-not-allowed"
-            : "bg-white hover:bg-gray-100 text-gray-700"
+            ? "bg-slate-200 text-slate-500 dark:bg-slate-700 dark:text-slate-300"
+            : "bg-white text-slate-700 border-slate-300 hover:bg-slate-100 dark:bg-slate-900 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800"
         }`}
       >
         ▶
       </button>
 
-      {/* Last */}
       <button
         disabled={page === totalPages - 1}
         onClick={() => onPageChange(totalPages - 1)}
-        className={`px-3 py-1.5 rounded-md text-sm border ${
+        className={`${buttonBase} ${
           page === totalPages - 1
-            ? "bg-gray-200 text-gray-500 cursor-not-allowed"
-            : "bg-white hover:bg-gray-100 text-gray-700"
+            ? "bg-slate-200 text-slate-500 dark:bg-slate-700 dark:text-slate-300"
+            : "bg-white text-slate-700 border-slate-300 hover:bg-slate-100 dark:bg-slate-900 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800"
         }`}
       >
         ⏭

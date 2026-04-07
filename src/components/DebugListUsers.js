@@ -56,25 +56,27 @@ const DebugListUsers = () => {
 
   if (loading) {
     return (
-      <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center bg-gray-100">
-        <p className="text-gray-600">Loading users...</p>
+      <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center bg-slate-100 dark:bg-slate-950 transition-colors duration-200">
+        <p className="text-slate-600 dark:text-slate-300">Loading users...</p>
       </div>
     );
   }
 
   if (!usersPage) {
     return (
-      <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center bg-gray-100">
-        <p className="text-gray-600">Failed to load users.</p>
+      <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center bg-slate-100 dark:bg-slate-950 transition-colors duration-200">
+        <p className="text-slate-600 dark:text-slate-300">
+          Failed to load users.
+        </p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-[calc(100vh-4rem)] w-full flex justify-center bg-gray-100 px-4 py-6">
+    <div className="min-h-[calc(100vh-4rem)] w-full flex justify-center bg-slate-100 dark:bg-slate-950 px-4 py-6 transition-colors duration-200">
       <div className="w-full max-w-6xl space-y-4">
         <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-3">
-          <h1 className="text-xl font-semibold text-gray-800">
+          <h1 className="text-xl font-semibold text-slate-900 dark:text-slate-100">
             Debug User List
           </h1>
 
