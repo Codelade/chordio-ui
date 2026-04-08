@@ -8,11 +8,11 @@ const navLinks = [
   { name: "Help", href: "#help" },
 ];
 
-const DebugNavbar = ({ children }) => {
+const Navbar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="flex flex-col bg-slate-100 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+    <div className="min-h-screen flex flex-col bg-slate-100 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
       <header className="border-b border-slate-800 bg-slate-900 shadow-lg shadow-slate-950/20">
         <div className="flex w-full flex-wrap items-center justify-between gap-3 px-4 py-4 sm:px-6 lg:px-8">
           <a href="#home" className="flex items-center gap-3">
@@ -85,9 +85,11 @@ const DebugNavbar = ({ children }) => {
         </div>
       </header>
 
-      <main className="flex flex-1 w-full flex-col mt-4">{children}</main>
+      <main className="flex min-h-[calc(100vh-4rem)] flex-1 w-full flex-col justify-between">
+        {children}
+      </main>
     </div>
   );
 };
 
-export default DebugNavbar;
+export default Navbar;

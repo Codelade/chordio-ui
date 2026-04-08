@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import DebugEditUser from "../components/DebugEditUser";
 import DebugNavbar from "../components/DebugNavbar";
+import Footer from "../components/Footer";
 
 const DebugEditUserLayout = () => {
   return (
@@ -8,6 +9,7 @@ const DebugEditUserLayout = () => {
       <DebugNavbar />
       <DebugEditUser />
       <Outlet />
+      <Footer />
     </>
   );
 };
