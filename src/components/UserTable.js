@@ -35,13 +35,10 @@ const UserTable = ({ users, sortBy, direction, onSort, onEdit, onDelete }) => {
                 )}
               </th>
             ))}
-            <th className="text-left font-semibold text-slate-600 dark:text-slate-300 uppercase tracking-wider py-3 px-6">
-              Password
-            </th>
             <th className="text-center font-semibold text-slate-600 dark:text-slate-300 uppercase tracking-wider py-3 px-6">
               Role
             </th>
-            <th className="text-left font-semibold text-slate-600 dark:text-slate-300 uppercase tracking-wider py-3 px-6">
+            <th className="text-right font-semibold text-slate-600 dark:text-slate-300 uppercase tracking-wider py-3 px-6">
               Operations
             </th>
           </tr>
@@ -66,13 +63,10 @@ const UserTable = ({ users, sortBy, direction, onSort, onEdit, onDelete }) => {
               <td className="px-6 py-4 text-slate-800 dark:text-slate-100">
                 {user.userName}
               </td>
-              <td className="px-6 py-4 text-slate-800 dark:text-slate-100">
-                {user.password}
-              </td>
               <td className="text-center px-6 py-4">
                 <RoleBadge role={user.role} />
               </td>
-              <td className="px-6 py-4 flex flex-col sm:flex-row gap-3">
+              <td className="px-6 py-4 flex flex-col sm:flex-row justify-end gap-3">
                 <button
                   onClick={() => onEdit(user.id)}
                   className="text-indigo-600 hover:text-indigo-700 dark:text-indigo-300 dark:hover:text-indigo-200 font-medium"

@@ -8,7 +8,7 @@ const navLinks = [
   { name: "Help", href: "#help" },
 ];
 
-const DebugNavbar = ({ children }) => {
+const AdminNavbar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -90,4 +90,4 @@ const DebugNavbar = ({ children }) => {
   );
 };
 
-export default DebugNavbar;
+export default AdminNavbar;

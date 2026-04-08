@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import DebugUserService from "../services/DebugUserService";
+import AdminUserService from "../services/AdminUserService";
 import UserForm from "./UserForm";
 
 const INITIAL_USER = {
@@ -10,7 +10,7 @@ const INITIAL_USER = {
   role: "USER",
 };
 
-const DebugCreateUser = () => {
+const AdminCreateUser = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(INITIAL_USER);
 
@@ -23,7 +23,7 @@ const DebugCreateUser = () => {
   };
 
   const handleCancel = () => {
-    navigate("/debug/listUsers", {
+    navigate("/admin/listUsers", {
       replace: true,
       state: {
         type: "info",
@@ -36,8 +36,8 @@ const DebugCreateUser = () => {
     e.preventDefault();
 
     try {
-      await DebugUserService.createUser(user);
-      navigate("/debug/listUsers", {
+      await AdminUserService.createUser(user);
+      navigate("/admin/listUsers", {
         replace: true,
         state: {
           type: "success",
@@ -46,7 +46,7 @@ const DebugCreateUser = () => {
       });
     } catch (error) {
       console.error("Error creating user:", error);
-      navigate("/debug/listUsers", {
+      navigate("/admin/listUsers", {
         replace: true,
         state: {
           type: "error",
@@ -69,4 +69,4 @@ const DebugCreateUser = () => {
   );
 };
 
-export default DebugCreateUser;
+export default AdminCreateUser;

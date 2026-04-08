@@ -15,6 +15,7 @@ const UserForm = ({
   onCancel,
   formTitle,
   submitLabel,
+  showPassword = true,
 }) => {
   return (
     <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center bg-slate-100 dark:bg-slate-950 px-4 py-8 transition-colors duration-200">
@@ -54,20 +55,22 @@ const UserForm = ({
             />
           </div>
 
-          <div className="flex flex-col gap-2">
-            <label className="text-sm font-medium text-slate-700 dark:text-slate-200">
-              Password
-            </label>
-            <input
-              type="password"
-              name="password"
-              value={user.password}
-              onChange={onChange}
-              placeholder="Password"
-              className="h-10 border border-slate-300 dark:border-slate-700 rounded-md px-3 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
-              required
-            />
-          </div>
+          {showPassword && (
+            <div className="flex flex-col gap-2">
+              <label className="text-sm font-medium text-slate-700 dark:text-slate-200">
+                Password
+              </label>
+              <input
+                type="password"
+                name="password"
+                value={user.password}
+                onChange={onChange}
+                placeholder="Password"
+                className="h-10 border border-slate-300 dark:border-slate-700 rounded-md px-3 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+                required
+              />
+            </div>
+          )}
 
           <div className="flex flex-col gap-2">
             <label className="text-sm font-medium text-slate-700 dark:text-slate-200">

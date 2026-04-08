@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import debugUserService from "../services/DebugUserService";
+import adminUserService from "../services/AdminUserService";
 import UserForm from "./UserForm";
 
 const EMPTY_USER = {
   email: "",
   userName: "",
-  password: "",
   role: "USER",
 };
 
-const DebugEditUser = () => {
+const AdminEditUser = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -20,16 +19,15 @@ const DebugEditUser = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await debugUserService.getUser(id);
+        const res = await adminUserService.getUser(id);
         setUser({
           email: res.data.email,
           userName: res.data.userName,
-          password: res.data.password,
           role: res.data.role,
         });
       } catch (err) {
         console.error("Failed to load user", err);
-        navigate("/debug/listUsers", {
+        navigate("/admin/listUsers", {
           replace: true,
           state: {
             type: "error",
@@ -53,7 +51,7 @@ const DebugEditUser = () => {
   };
 
   const handleCancel = () => {
-    navigate("/debug/listUsers", {
+    navigate("/admin/listUsers", {
       replace: true,
       state: {
         type: "info",
@@ -66,8 +64,8 @@ const DebugEditUser = () => {
     e.preventDefault();
 
     try {
-      await debugUserService.updateUser(id, user);
-      navigate("/debug/listUsers", {
+      await adminUserService.updateUser(id, user);
+      navigate("/admin/listUsers", {
         replace: true,
         state: {
           type: "success",
@@ -76,7 +74,7 @@ const DebugEditUser = () => {
       });
     } catch (error) {
       console.error("Error updating user:", error);
-      navigate("/debug/listUsers", {
+      navigate("/admin/listUsers", {
         replace: true,
         state: {
           type: "error",
@@ -103,8 +101,9 @@ const DebugEditUser = () => {
       onCancel={handleCancel}
       formTitle="Update User"
       submitLabel="Update"
+      showPassword={false}
     />
   );
 };
 
-export default DebugEditUser;
+export default AdminEditUser;

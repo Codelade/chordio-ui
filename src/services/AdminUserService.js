@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const USER_API_URL = "http://localhost:8080/api/v1/debug/users";
+const USER_API_URL = "http://localhost:8080/api/v1/admin/users";
 
-class DebugUserService {
+class AdminUserService {
   createUser(user) {
     return axios.post(USER_API_URL, user);
   }
@@ -42,5 +42,4 @@ class DebugUserService {
   }
 }
 
-const debugUserService = new DebugUserService();
-export default debugUserService;
+export default new AdminUserService();

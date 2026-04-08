@@ -1,20 +1,20 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import DebugCreateUserLayout from "./layouts/DebugCreateUserLayout";
-import DebugListUsersLayout from "./layouts/DebugListUsersLayout";
-import DebugEditUserLayout from "./layouts/DebugEditUserLayout";
+import AdminCreateUserLayout from "./layouts/AdminCreateUserLayout";
+import AdminListUsersLayout from "./layouts/AdminListUsersLayout";
+import AdminEditUserLayout from "./layouts/AdminEditUserLayout";
 import AuthLayout from "./layouts/AuthLayout";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/debug/createUser" element={<DebugCreateUserLayout />} />
+        <Route path="/admin/createUser" element={<AdminCreateUserLayout />} />
 
-        <Route path="/debug/listUsers" element={<DebugListUsersLayout />} />
+        <Route path="/admin/listUsers" element={<AdminListUsersLayout />} />
 
-        <Route path="/debug/editUser/:id" element={<DebugEditUserLayout />} />
+        <Route path="/admin/editUser/:id" element={<AdminEditUserLayout />} />
 
         <Route path="/auth" element={<AuthLayout />} />
       </Routes>

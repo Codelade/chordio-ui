@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import userService from "../services/DebugUserService";
+import userService from "../services/AdminUserService";
 import useDebouncedValue from "./useDebouncedValue";
 
 const INITIAL_FILTERS = {

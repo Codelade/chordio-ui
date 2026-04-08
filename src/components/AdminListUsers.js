@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import userService from "../services/DebugUserService";
+import userService from "../services/AdminUserService";
 import useUsersSearch from "../hooks/useUsersSearch";
 
 import NotificationBar from "./NotificationBar";
@@ -10,7 +10,7 @@ import PageSizeSelector from "./PageSizeSelector";
 import ToolBar from "./ToolBar";
 import UserTable from "./UserTable";
 
-const DebugListUsers = () => {
+const AdminListUsers = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -75,7 +75,7 @@ const DebugListUsers = () => {
     <div className="w-full flex justify-center bg-slate-100 dark:bg-slate-950 px-4 py-4 transition-colors duration-200">
       <div className="w-full max-w-6xl space-y-4">
         <h1 className="text-xl font-semibold text-slate-900 dark:text-slate-100">
-          Debug User List
+          Admin User List
         </h1>
 
         <NotificationBar
@@ -86,7 +86,7 @@ const DebugListUsers = () => {
         <ToolBar
           searchTerm={search}
           setSearchTerm={setSearchTerm}
-          onCreate={() => navigate("/debug/createUser")}
+          onCreate={() => navigate("/admin/createUser")}
         />
 
         <UserTable
@@ -94,7 +94,7 @@ const DebugListUsers = () => {
           sortBy={sortBy}
           direction={direction}
           onSort={handleSort}
-          onEdit={(id) => navigate(`/debug/editUser/${id}`)}
+          onEdit={(id) => navigate(`/admin/editUser/${id}`)}
           onDelete={(user) => {
             setSelectedUser(user);
             setIsDeleteOpen(true);
@@ -134,4 +134,4 @@ const DebugListUsers = () => {
   );
 };
 
-export default DebugListUsers;
+export default AdminListUsers;
