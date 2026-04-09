@@ -1,14 +1,14 @@
-import axios from "axios";
+import axiosInstance from "../api/axiosInstance";
 
-const USER_API_URL = "http://localhost:8080/api/v1/admin/users";
+const USER_API_URL = "/api/v1/admin/users";
 
 class AdminUserService {
   createUser(user) {
-    return axios.post(USER_API_URL, user);
+    return axiosInstance.post(USER_API_URL, user);
   }
 
   getUsers() {
-    return axios.get(USER_API_URL);
+    return axiosInstance.get(USER_API_URL);
   }
 
   searchUsers({
@@ -22,23 +22,22 @@ class AdminUserService {
       search,
       page,
       size,
-      sortBy,
-      direction,
+      sort: `${sortBy},${direction}`,
     });
 
-    return axios.get(`${USER_API_URL}/search?${params.toString()}`);
+    return axiosInstance.get(`${USER_API_URL}/search?${params.toString()}`);
   }
 
   getUser(id) {
-    return axios.get(`${USER_API_URL}/${id}`);
+    return axiosInstance.get(`${USER_API_URL}/${id}`);
   }
 
   updateUser(id, user) {
-    return axios.put(`${USER_API_URL}/${id}`, user);
+    return axiosInstance.put(`${USER_API_URL}/${id}`, user);
   }
 
   deleteUser(id) {
-    return axios.delete(`${USER_API_URL}/${id}`);
+    return axiosInstance.delete(`${USER_API_URL}/${id}`);
   }
 }
 

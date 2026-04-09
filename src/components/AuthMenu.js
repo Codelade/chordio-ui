@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const AuthMenu = () => {
   const [mode, setMode] = useState("login");
@@ -61,14 +63,42 @@ const AuthMenu = () => {
 /* ---------------- LOGIN FORM ---------------- */
 
 function LoginForm() {
+  const { login } = useAuth();
+  const navigate = useNavigate();
+  const [usernameOrEmail, setUsernameOrEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+    try {
+      await login(usernameOrEmail, password);
+      navigate("/admin/listUsers");
+    } catch (err) {
+      setError(
+        err.response?.data?.message || "Invalid credentials. Please try again.",
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <form className="space-y-4">
+    <form className="space-y-4" onSubmit={handleSubmit}>
+      {error && (
+        <p className="text-sm text-red-500 dark:text-red-400">{error}</p>
+      )}
       <div className="space-y-1">
         <label className="block text-sm font-medium text-slate-700 dark:text-slate-200">
-          Email
+          Email or Username
         </label>
         <input
-          type="email"
+          type="text"
+          value={usernameOrEmail}
+          onChange={(e) => setUsernameOrEmail(e.target.value)}
           className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:placeholder-slate-500"
           placeholder="you@example.com"
           required
@@ -81,6 +111,8 @@ function LoginForm() {
         </label>
         <input
           type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
           className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:placeholder-slate-500"
           placeholder="••••••••"
           required
@@ -89,9 +121,10 @@ function LoginForm() {
 
       <button
         type="submit"
-        className="w-full rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-medium text-white shadow-lg shadow-indigo-500/20 hover:bg-indigo-500 transition"
+        disabled={loading}
+        className="w-full rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-medium text-white shadow-lg shadow-indigo-500/20 hover:bg-indigo-500 transition disabled:opacity-60"
       >
-        Sign in
+        {loading ? "Signing in…" : "Sign in"}
       </button>
     </form>
   );
@@ -100,14 +133,48 @@ function LoginForm() {
 /* ---------------- REGISTER FORM ---------------- */
 
 function RegisterForm() {
+  const { register } = useAuth();
+  const navigate = useNavigate();
+  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    if (password !== confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+    setLoading(true);
+    try {
+      await register(userName, email, password);
+      navigate("/auth");
+    } catch (err) {
+      setError(
+        err.response?.data?.message || "Registration failed. Please try again.",
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <form className="space-y-4">
+    <form className="space-y-4" onSubmit={handleSubmit}>
+      {error && (
+        <p className="text-sm text-red-500 dark:text-red-400">{error}</p>
+      )}
       <div className="space-y-1">
         <label className="block text-sm font-medium text-slate-700 dark:text-slate-200">
           Username
         </label>
         <input
           type="text"
+          value={userName}
+          onChange={(e) => setUserName(e.target.value)}
           className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:placeholder-slate-500"
           placeholder="yourusername"
           required
@@ -120,6 +187,8 @@ function RegisterForm() {
         </label>
         <input
           type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:placeholder-slate-500"
           placeholder="you@example.com"
           required
@@ -132,6 +201,8 @@ function RegisterForm() {
         </label>
         <input
           type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
           className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:placeholder-slate-500"
           placeholder="At least 8 characters"
           required
@@ -144,6 +215,8 @@ function RegisterForm() {
         </label>
         <input
           type="password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
           className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:placeholder-slate-500"
           placeholder="Repeat your password"
           required
@@ -152,9 +225,10 @@ function RegisterForm() {
 
       <button
         type="submit"
-        className="w-full rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-medium text-white shadow-lg shadow-indigo-500/20 hover:bg-indigo-500 transition"
+        disabled={loading}
+        className="w-full rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-medium text-white shadow-lg shadow-indigo-500/20 hover:bg-indigo-500 transition disabled:opacity-60"
       >
-        Create account
+        {loading ? "Creating account…" : "Create account"}
       </button>
     </form>
   );
