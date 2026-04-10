@@ -55,7 +55,7 @@ const AdminListUsers = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center bg-slate-100 dark:bg-slate-950 transition-colors duration-200 min-h-[200px]">
+      <div className="flex items-center justify-center min-h-[200px]">
         <p className="text-slate-600 dark:text-slate-300">Loading users...</p>
       </div>
     );
@@ -63,7 +63,7 @@ const AdminListUsers = () => {
 
   if (!usersPage) {
     return (
-      <div className="flex items-center justify-center bg-slate-100 dark:bg-slate-950 transition-colors duration-200 min-h-[200px]">
+      <div className="flex items-center justify-center min-h-[200px]">
         <p className="text-slate-600 dark:text-slate-300">
           Failed to load users.
         </p>
@@ -72,8 +72,8 @@ const AdminListUsers = () => {
   }
 
   return (
-    <div className="w-full flex justify-center bg-slate-100 dark:bg-slate-950 px-4 py-4 transition-colors duration-200">
-      <div className="w-full max-w-6xl space-y-4">
+    <div className="w-full">
+      <div className="mx-auto w-full max-w-7xl px-6 sm:px-8 space-y-4">
         <h1 className="text-xl font-semibold text-slate-900 dark:text-slate-100">
           Admin User List
         </h1>

@@ -18,7 +18,7 @@ const UserForm = ({
   showPassword = true,
 }) => {
   return (
-    <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center bg-slate-100 dark:bg-slate-950 px-4 py-8 transition-colors duration-200">
+    <div className="flex items-center justify-center px-6 sm:px-8">
       <div className="w-full max-w-lg bg-white dark:bg-slate-900 shadow-lg dark:shadow-slate-950/40 rounded-2xl p-6 border border-slate-200 dark:border-slate-800">
         <h1 className="text-xl font-semibold text-slate-900 dark:text-slate-100 text-center mb-6">
           {formTitle || submitLabel}
