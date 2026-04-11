@@ -5,13 +5,20 @@ import AdminCreateUserLayout from "./layouts/AdminCreateUserLayout";
 import AdminListUsersLayout from "./layouts/AdminListUsersLayout";
 import AdminEditUserLayout from "./layouts/AdminEditUserLayout";
 import AuthLayout from "./layouts/AuthLayout";
+import UserHomeLayout from "./layouts/UserHomeLayout";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 
-function ProtectedRoute({ children }) {
+function ProtectedRoute({ children, requiredRole }) {
   const { user } = useAuth();
+
   if (!user) {
     return <Navigate to="/auth" replace />;
   }
+
+  if (requiredRole && user.role?.toLowerCase() !== requiredRole.toLowerCase()) {
+    return <Navigate to="/home" replace />;
+  }
+
   return children;
 }
 
@@ -23,9 +30,18 @@ function App() {
           <Route path="/auth" element={<AuthLayout />} />
 
           <Route
-            path="/admin/createUser"
+            path="/home"
             element={
               <ProtectedRoute>
+                <UserHomeLayout />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/admin/createUser"
+            element={
+              <ProtectedRoute requiredRole="administrator">
                 <AdminCreateUserLayout />
               </ProtectedRoute>
             }
@@ -33,7 +49,7 @@ function App() {
           <Route
             path="/admin/listUsers"
             element={
-              <ProtectedRoute>
+              <ProtectedRoute requiredRole="administrator">
                 <AdminListUsersLayout />
               </ProtectedRoute>
             }
@@ -41,7 +57,7 @@ function App() {
           <Route
             path="/admin/editUser/:id"
             element={
-              <ProtectedRoute>
+              <ProtectedRoute requiredRole="administrator">
                 <AdminEditUserLayout />
               </ProtectedRoute>
             }

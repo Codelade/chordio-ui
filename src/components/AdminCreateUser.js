@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import AdminUserService from "../services/AdminUserService";
+import adminUserService from "../services/AdminUserService";
 import UserForm from "./UserForm";
 
 const INITIAL_USER = {
@@ -36,7 +36,7 @@ const AdminCreateUser = () => {
     e.preventDefault();
 
     try {
-      await AdminUserService.createUser(user);
+      await adminUserService.createUser(user);
       navigate("/admin/listUsers", {
         replace: true,
         state: {

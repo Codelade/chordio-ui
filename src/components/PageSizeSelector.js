@@ -1,5 +1,3 @@
-import React from "react";
-
 const PageSizeSelector = ({ size, onChange }) => {
   const options = [5, 10, 15, 30];
 

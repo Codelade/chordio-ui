@@ -1,5 +1,3 @@
-import React from "react";
-
 const Pagination = ({ page, totalPages, onPageChange }) => {
   if (totalPages === 0) return null;
 

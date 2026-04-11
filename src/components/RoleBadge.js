@@ -1,5 +1,3 @@
-import React from "react";
-
 const ROLE_STYLES = {
   USER: "bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-200",
   MODERATOR:

@@ -1,5 +1,3 @@
-import React from "react";
-
 const ToolBar = ({ searchTerm, setSearchTerm, onCreate }) => {
   return (
     <div className="flex flex-row items-center gap-2 sm:justify-between">

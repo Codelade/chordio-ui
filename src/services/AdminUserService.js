@@ -7,10 +7,6 @@ class AdminUserService {
     return axiosInstance.post(USER_API_URL, user);
   }
 
-  getUsers() {
-    return axiosInstance.get(USER_API_URL);
-  }
-
   searchUsers({
     search = "",
     page = 0,

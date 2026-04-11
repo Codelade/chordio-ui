@@ -1,7 +1,5 @@
-import React from "react";
 import AuthMenu from "../components/AuthMenu";
 import Footer from "../components/Footer";
-import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar";
 
 const AuthLayout = () => {
@@ -13,7 +11,6 @@ const AuthLayout = () => {
         </div>
       </div>
       <Footer />
-      <Outlet />
     </Navbar>
   );
 };

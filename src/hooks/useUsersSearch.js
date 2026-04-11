@@ -21,9 +21,11 @@ const useUsersSearch = () => {
 
   const [usersPage, setUsersPage] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const fetchData = useCallback(async () => {
     setLoading(true);
+    setError(null);
     try {
       const response = await userService.searchUsers({
         search: debouncedSearch,
@@ -34,9 +36,9 @@ const useUsersSearch = () => {
       });
 
       setUsersPage(response.data);
-    } catch (error) {
-      console.error("Failed to load users", error);
-      setUsersPage(null);
+    } catch (err) {
+      console.error("Failed to load users", err);
+      setError("Failed to load users.");
     } finally {
       setLoading(false);
     }
@@ -78,6 +80,7 @@ const useUsersSearch = () => {
     direction,
     usersPage,
     loading,
+    error,
     handleSort,
     refresh: fetchData,
   };

@@ -1,5 +1,3 @@
-import React from "react";
-
 const NotificationBar = ({ type, message }) => {
   const styles = {
     success:

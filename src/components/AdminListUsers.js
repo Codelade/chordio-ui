@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import userService from "../services/AdminUserService";
 import useUsersSearch from "../hooks/useUsersSearch";
@@ -28,6 +28,7 @@ const AdminListUsers = () => {
     direction,
     usersPage,
     loading,
+    error,
     handleSort,
     refresh,
   } = useUsersSearch();
@@ -43,7 +44,7 @@ const AdminListUsers = () => {
         });
 
         refresh();
-      } catch (error) {
+      } catch (err) {
         navigate(location.pathname, {
           replace: true,
           state: { type: "error", message: "Failed to delete user" },
@@ -53,7 +54,7 @@ const AdminListUsers = () => {
     [navigate, location.pathname, refresh],
   );
 
-  if (loading) {
+  if (loading && !usersPage) {
     return (
       <div className="flex items-center justify-center min-h-[200px]">
         <p className="text-slate-600 dark:text-slate-300">Loading users...</p>
@@ -61,18 +62,18 @@ const AdminListUsers = () => {
     );
   }
 
-  if (!usersPage) {
+  if (error && !usersPage) {
     return (
       <div className="flex items-center justify-center min-h-[200px]">
-        <p className="text-slate-600 dark:text-slate-300">
-          Failed to load users.
-        </p>
+        <p className="text-slate-600 dark:text-slate-300">{error}</p>
       </div>
     );
   }
 
   return (
-    <div className="w-full">
+    <div
+      className={`w-full transition-opacity duration-150 ${loading ? "opacity-60 pointer-events-none" : ""}`}
+    >
       <div className="mx-auto w-full max-w-7xl px-6 sm:px-8 space-y-4">
         <h1 className="text-xl font-semibold text-slate-900 dark:text-slate-100">
           Admin User List

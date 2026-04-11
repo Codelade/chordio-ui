@@ -1,17 +1,17 @@
-import AdminEditUser from "../components/AdminEditUser";
-import AdminNavbar from "../components/AdminNavbar";
+import Navbar from "../components/Navbar";
+import UserHome from "../components/UserHome";
 import Footer from "../components/Footer";
 
-const AdminEditUserLayout = () => {
+const UserHomeLayout = () => {
   return (
     <div className="flex flex-col min-h-screen">
-      <AdminNavbar />
+      <Navbar />
       <main className="flex-1 bg-slate-100 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-200 py-8">
-        <AdminEditUser />
+        <UserHome />
       </main>
       <Footer />
     </div>
   );
 };
 
-export default AdminEditUserLayout;
+export default UserHomeLayout;

@@ -1,5 +1,3 @@
-import React from "react";
-
 const ROLE_OPTIONS = [
   { value: "USER", label: "User" },
   { value: "MODERATOR", label: "Moderator" },

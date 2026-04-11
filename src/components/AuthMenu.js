@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
@@ -75,8 +75,12 @@ function LoginForm() {
     setError("");
     setLoading(true);
     try {
-      await login(usernameOrEmail, password);
-      navigate("/admin/listUsers");
+      const userData = await login(usernameOrEmail, password);
+      navigate(
+        userData.role?.toLowerCase() === "administrator"
+          ? "/admin/listUsers"
+          : "/home",
+      );
     } catch (err) {
       setError(
         err.response?.data?.message || "Invalid credentials. Please try again.",
